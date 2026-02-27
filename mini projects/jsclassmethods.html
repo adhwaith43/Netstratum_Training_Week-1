@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JsClassMethods</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script>
+        function show(){
+            document.getElementById("d").classList.remove('hidden');
+        }
+        function hide(){
+            document.getElementById("d").classList.add('hidden');
+
+        }
+        function toggle(){
+            document.getElementById("d").classList.toggle('hidden')
+        }
+    </script>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+ <button id="s" onclick="show()">Show</button>
+ <button id="s" onclick="toggle()">toggle</button>
+
+ <div class="container w-50 border border-2 hidden border-danger  mt-3" id="d">
+    <div class="d-flex justify-content-end">
+        <button onclick="hide()" >X</button>
+    </div>
+    <h1>Heading</h1>
+    <p>paragraph</p>
+    <p>Paragraph</p>
+ </div>
+    
+</body>
+</html>
