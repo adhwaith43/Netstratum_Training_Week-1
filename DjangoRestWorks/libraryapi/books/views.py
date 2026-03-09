@@ -1,3 +1,4 @@
+import django
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,6 +13,7 @@ from books.models import Book
 #         b=Book.objects.all()
 #         books=BookSerializer(b,many=True)
 #         return Response(books.data,status=status.HTTP_200_OK)
+from django.db.models import Q
 
 #     def post(self,request):
 #         book=BookSerializer(data=request.data)
@@ -123,5 +125,11 @@ class SearchView(APIView):
                                   Q(author__icontains=query)|
                                   Q(price__icontains=query)|
                                   Q(language__icontains=query))
+            if not b.exists(): #query_set empty
+                return Response({'message':'no results'},status=status.HTTP_200_OK)
+            
+
             books=BookSerializer(b,many=True)
             return Response(books.data,status=status.HTTP_200_OK)
+        else:#keyword empty
+            return Response({'message':'no results'},status=status.HTTP_200_OK)

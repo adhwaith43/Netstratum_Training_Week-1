@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('booklist/', views.BookList.as_view()),
     # path('bookdetail/<int:pk>/', views.BookDetail.as_view())
+    path('search',views.SearchView.as_view(),name='search'),
     path('',include(router.urls))
 ]
 
