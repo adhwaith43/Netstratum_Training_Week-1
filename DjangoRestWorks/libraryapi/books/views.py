@@ -33,11 +33,11 @@ from rest_framework import mixins,generics
 #         return self.create(request)
     
 
-# using generics
+# # using generics
 
-class BookList(generics.ListCreateAPIView):
-    queryset=Book.objects.all()
-    serializer_class=BookSerializer
+# class BookList(generics.ListCreateAPIView):
+#     queryset=Book.objects.all()
+#     serializer_class=BookSerializer
 
 
 
@@ -93,8 +93,18 @@ class BookList(generics.ListCreateAPIView):
 #         return self.destroy(request,pk)
 
 
-# using generics
+# # using generics
 
-class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+# class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset=Book.objects.all()
+#     serializer_class = BookSerializer
+
+
+
+
+#ViewSets
+from rest_framework import viewsets
+
+class BookView(viewsets.ModelViewSet): #Get/Post/GET(id)/Put/Delete
     queryset=Book.objects.all()
     serializer_class = BookSerializer
