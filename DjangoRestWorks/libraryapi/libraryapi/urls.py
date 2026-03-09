@@ -24,7 +24,7 @@ router.register('books',views.BookView)
 
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     # path('booklist/', views.BookList.as_view()),
     # path('bookdetail/<int:pk>/', views.BookDetail.as_view())
     path('',include(router.urls))

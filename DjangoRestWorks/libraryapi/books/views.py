@@ -108,3 +108,20 @@ from rest_framework import viewsets
 class BookView(viewsets.ModelViewSet): #Get/Post/GET(id)/Put/Delete
     queryset=Book.objects.all()
     serializer_class = BookSerializer
+
+
+
+
+# SearchAPIView
+
+class SearchView(APIView):
+    def get(self,request):
+        # query
+        query=self.request.query_params.get('search')
+        if query:
+            b=Book.objects.filter(Q(title__icontains=query)|
+                                  Q(author__icontains=query)
+                                  Q(price__icontains=query)|
+                                  Q(language__icontains=query))
+            books=BookSerializer(b,many=True)
+            return Response(books.data,status=status.HTTP_200_OK)
