@@ -120,7 +120,7 @@ class SearchView(APIView):
         query=self.request.query_params.get('search')
         if query:
             b=Book.objects.filter(Q(title__icontains=query)|
-                                  Q(author__icontains=query)
+                                  Q(author__icontains=query)|
                                   Q(price__icontains=query)|
                                   Q(language__icontains=query))
             books=BookSerializer(b,many=True)
