@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function f(){
+            // var e=document.getElementsByClassName("class1");
+            // // e[0].style.color="red";
+            // for (let i of e){
+            //     i.innerHTML="new paragraph"
+            //     i.style.color="red"
+            // }
+
+            // var e=document.getElementsByTagName("p");
+            // for (let i of e){
+            //     i.innerHTML="new paragraph"
+            //     i.style.color="red"
+            // }
+
+            // var e=document.querySelector('p') only one(first) element is selected
+            // e.style.color="red"
+            
+            var e=document.querySelectorAll('p')
+            e[0].style.color="red"
+        }
+    </script>
+
+</head>
+<body>
+    <h1 class="class1">Heading 1</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+    <h2 class="class1">Heading2</h2>
+    <p>Paragraph3</p>
+    <button onclick="f()">Click</button>
+</body>
+</html>

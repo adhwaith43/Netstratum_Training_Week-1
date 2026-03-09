@@ -1,0 +1,9 @@
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgb(168, 168, 168) !important;
+}
+
+body{
+    justify-content: center;
+    align-items: center;
+}

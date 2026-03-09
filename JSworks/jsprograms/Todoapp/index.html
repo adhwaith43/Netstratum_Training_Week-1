@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Todo List</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body class="light">
+
+
+    <div class="container">
+
+
+        <h1 class="title">
+
+            TODO LIST
+
+        </h1>
+
+
+
+        <div class="top-bar">
+
+
+
+            <div class="search-box">
+
+                <input type="text" id="searchInput" placeholder="Search note...">
+
+                <span class="search-icon">🔍</span>
+
+            </div>
+
+
+
+            <select id="filterSelect">
+
+                <option value="all">ALL</option>
+
+                <option value="active">Active</option>
+
+                <option value="completed">Completed</option>
+
+            </select>
+
+
+
+            <button id="themeToggle">
+                🌙
+
+            </button>
+
+
+
+        </div>
+
+
+
+        <div class="task-container">
+
+            <ul id="taskList"></ul>
+
+        </div>
+
+
+
+        <div id="emptyState">
+
+            <img src="icons/Detective-check-footprint 1.svg" width="200" height="200">
+
+
+        </div>
+
+
+
+    </div>
+
+    <button id="undoBtn">
+    ↺
+    </button>
+
+    <button id="addBtn">
+
+
+        +
+
+    </button>
+
+
+
+    <div id="modal">
+
+
+        <div class="modal-content">
+
+
+            <h2>NEW NOTE</h2>
+
+
+
+            <input type="text" id="taskInput" placeholder="Input your note...">
+
+
+
+            <div class="modal-buttons">
+
+
+                <button id="cancelBtn">
+
+                    CANCEL
+
+                </button>
+
+
+
+                <button id="applyBtn">
+
+                    APPLY
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

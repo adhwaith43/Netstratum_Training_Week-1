@@ -1,0 +1,8 @@
+body{
+    font-style: italic;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgb(168, 168, 168) !important;
+}
