@@ -203,4 +203,33 @@
 // p.show()
 
 
- 
+
+
+
+
+
+//////setTimeout
+
+
+
+//  console.log("Start")
+
+// setTimeout(() => {
+//   console.log("Inside timeout")
+// },2000)
+
+// console.log("End")
+
+
+
+const myPromise = new Promise((resolve,reject)=>{
+
+ setTimeout(()=>{
+  resolve("Data received")
+ },2000)
+
+})
+
+myPromise.then((result)=>{
+ console.log(result)
+})
