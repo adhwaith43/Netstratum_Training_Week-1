@@ -47,12 +47,6 @@ class BookList(generics.ListCreateAPIView):
 
 
 
-
-
-
-
-
-
 # # using api views
 # from django.http import Http404
 
