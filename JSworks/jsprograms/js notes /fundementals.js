@@ -313,20 +313,25 @@
 // getusers()
 
 
-async function getposts(){
+// async function getposts(){
 
- const [postsRes, usersRes] = await Promise.all([
-   fetch("https://jsonplaceholder.typicode.com/posts"),
-   fetch("https://jsonplaceholder.typicode.com/users")
- ])
+//  const [postsRes, usersRes] = await Promise.all([
+//    fetch("https://jsonplaceholder.typicode.com/posts"),
+//    fetch("https://jsonplaceholder.typicode.com/users")
+//  ])
 
- const posts = await postsRes.json()
- const users = await usersRes.json()
+//  const posts = await postsRes.json()
+//  const users = await usersRes.json()
 
- console.log(posts)
- console.log(users)
+//  posts.slice(0,10).forEach(post => {
 
-}
+//   const user = users.find(u => u.id === post.userId)
 
-getposts()
+//   console.log(`${user.name} → ${post.title} → ${post.id}`)
+
+//  })
+
+// }
+
+// getposts()
 
