@@ -244,6 +244,7 @@
 // })
 
 
+
 /////////// js practice
 
 // // promise
@@ -265,6 +266,32 @@
 // .catch(error => console.log(error))
 
 
+////promise.all()
+
+function slow1(){
+ return new Promise(resolve=>{
+  setTimeout(()=>resolve("Task1 done"),2000)
+ })
+}
+
+function slow2(){
+ return new Promise(resolve=>{
+  setTimeout(()=>resolve("Task2 done"),2000)
+ })
+}
+
+async function run(){
+
+ const results = await Promise.all([
+  slow1(),
+  slow2()
+ ])
+
+ console.log(results)
+
+}
+
+run()
 
 
 // async function getusers() {
