@@ -222,14 +222,60 @@
 
 
 
-const myPromise = new Promise((resolve,reject)=>{
+// const p = new Promise((resolve,reject)=>{
 
- setTimeout(()=>{
-  resolve("Data received")
- },2000)
+//  setTimeout(()=>{
+//   resolve("Data received")
+//  },2000)
+
+// let a= 1 +1
+
+// if(a==2){
+//     resoleve("succes")
+// }
+// else{
+//     reject("Failed")
+// }
+
+// })
+
+// p.then((result)=>{
+//  console.log(result)
+// })
+
+
+// js practice
+
+
+// async function getusers() {
+
+//     const res = await fetch("https://jsonplaceholder.typicode.com/posts/limit-10") 
+//     const data= await res.json()
+
+//     console.log(data)
+
+//     data.array.forEach(element => {
+//         console.log(`${element.id} + ${element.title}`)
+//     });
+
+// getusers();
+
+
+
+// promise
+
+const myPromise = new Promise((resolve, reject) => {
+
+    let foodReady = true
+
+    if(foodReady){
+        resolve("Pizza delivered")
+    } else {
+        reject("Restaurant closed")
+    }
 
 })
 
-myPromise.then((result)=>{
- console.log(result)
-})
+myPromise
+.then(result => console.log(result))
+.catch(error => console.log(error))
