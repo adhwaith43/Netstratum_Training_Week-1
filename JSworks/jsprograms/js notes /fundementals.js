@@ -268,42 +268,47 @@
 
 ////promise.all()
 
-function slow1(){
- return new Promise(resolve=>{
-  setTimeout(()=>resolve("Task1 done"),2000)
- })
-}
+// function slow1(){
+//  return new Promise(resolve=>{
+//   setTimeout(()=>resolve("Task1 done"),2000)
+//  })
+// }
 
-function slow2(){
- return new Promise(resolve=>{
-  setTimeout(()=>resolve("Task2 done"),2000)
- })
-}
+// function slow2(){
+//  return new Promise(resolve=>{
+//   setTimeout(()=>resolve("Task2 done"),2000)
+//  })
+// }
 
-async function run(){
+// async function run(){
 
- const results = await Promise.all([
-  slow1(),
-  slow2()
- ])
+//  const results = await Promise.all([
+//   slow1(),
+//   slow2()
+//  ])
 
- console.log(results)
+//  console.log(results)
 
-}
+// }
 
-run()
+// run()
+
+/////another example
 
 
-// async function getusers() {
+// async function getusers(){
 
-//     const res = await fetch("https://jsonplaceholder.typicode.com/posts/limit-10") 
-//     const data= await res.json()
+//  const res = await fetch("https://jsonplaceholder.typicode.com/posts")
 
-//     console.log(data)
+//  const data = await res.json()
 
-//     data.array.forEach(element => {
-//         console.log(`${element.id} + ${element.title}`)
-//     });
+//  const first10 = data.slice(0,10)
 
-// getusers();
+//  first10.forEach(post => {
+//   console.log(`${post.id} - ${post.title}`)
+//  })
+
+// }
+
+// getusers()
 
