@@ -244,7 +244,27 @@
 // })
 
 
-// js practice
+/////////// js practice
+
+// // promise
+
+// const myPromise = new Promise((resolve, reject) => {
+
+//     let foodReady = false
+
+//     if(foodReady){
+//         resolve("Pizza delivered")
+//     } else {
+//         reject("Restaurant closed")
+//     }
+
+// })
+
+// myPromise
+// .then(result => console.log(result))
+// .catch(error => console.log(error))
+
+
 
 
 // async function getusers() {
@@ -260,22 +280,3 @@
 
 // getusers();
 
-
-
-// promise
-
-const myPromise = new Promise((resolve, reject) => {
-
-    let foodReady = true
-
-    if(foodReady){
-        resolve("Pizza delivered")
-    } else {
-        reject("Restaurant closed")
-    }
-
-})
-
-myPromise
-.then(result => console.log(result))
-.catch(error => console.log(error))
