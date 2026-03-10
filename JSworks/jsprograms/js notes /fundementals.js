@@ -312,3 +312,21 @@
 
 // getusers()
 
+
+async function getposts(){
+
+ const [postsRes, usersRes] = await Promise.all([
+   fetch("https://jsonplaceholder.typicode.com/posts"),
+   fetch("https://jsonplaceholder.typicode.com/users")
+ ])
+
+ const posts = await postsRes.json()
+ const users = await usersRes.json()
+
+ console.log(posts)
+ console.log(users)
+
+}
+
+getposts()
+
