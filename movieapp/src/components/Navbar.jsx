@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useTranslation } from 'react-i18next';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaSun, FaMoon } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  
-  // State for our new modal
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  // Theme logic
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   return (
     <>
@@ -20,8 +26,8 @@ export default function Navbar() {
           <Link to="/" style={{ color: 'var(--primary-color)', fontSize: '1.8rem', fontWeight: '900', letterSpacing: '2px' }}>
             CINEVAULT
           </Link>
-          <div style={{ display: 'flex', gap: '15px', display: window.innerWidth > 768 ? 'flex' : 'none' }}>
-            <Link to="/" style={{ fontWeight: '500' }}>{t('home')}</Link>
+          <div style={{ gap: '15px', display: window.innerWidth > 768 ? 'flex' : 'none' }}>
+            {/* Removed the 'Home' link as requested */}
             <Link to="/search?type=tv" style={{ fontWeight: '500' }}>{t('tvShows')}</Link>
             <Link to="/search?type=movie" style={{ fontWeight: '500' }}>{t('movies')}</Link>
           </div>
@@ -29,6 +35,11 @@ export default function Navbar() {
         
         <div className="nav-links">
           <FaSearch size={20} style={{ cursor: 'pointer' }} onClick={() => navigate('/search')} />
+          
+          {/* Theme Toggle Button */}
+          <button onClick={toggleTheme} style={{ background: 'transparent', color: 'var(--text-color)', fontSize: '1.2rem', padding: '0 5px' }}>
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          </button>
 
           <select className="lang-select" onChange={(e) => i18n.changeLanguage(e.target.value)} defaultValue={i18n.language}>
             <option value="en">English</option>
@@ -42,9 +53,8 @@ export default function Navbar() {
             <>
               <Link to="/favorites" style={{display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
               <Link to="/profile">
-                <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid black' }} />
+                <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%'}} />
               </Link>
-              {/* Trigger the modal instead of instantly logging out */}
               <button className="btn-secondary" onClick={() => setShowLogoutModal(true)}>{t('logout')}</button>
             </>
           ) : (
@@ -53,26 +63,16 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* The Logout Confirmation Modal */}
+      {/* Logout Modal */}
       <AnimatePresence>
         {showLogoutModal && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-          >
-            <motion.div 
-              initial={{ scale: 0.9 }} 
-              animate={{ scale: 1 }} 
-              exit={{ scale: 0.9 }}
-              style={{ background: '#141414', padding: '40px', borderRadius: '8px', border: '1px solid #333', textAlign: 'center', maxWidth: '400px' }}
-            >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} style={{ background: 'var(--bg-color)', padding: '40px', borderRadius: '8px', border: '1px solid #555', textAlign: 'center', maxWidth: '400px' }}>
               <h2 style={{ marginBottom: '10px' }}>Ready to leave?</h2>
-              <p style={{ color: '#aaa', marginBottom: '30px' }}>You will be securely signed out of Cinevault.</p>
+              <p style={{ color: '#888', marginBottom: '30px' }}>You will be securely signed out of Cinevault.</p>
               <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
                 <button className="btn-secondary" onClick={() => setShowLogoutModal(false)}>Cancel</button>
-                <button className="btn-primary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</button>
+                <button className="btn-primary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Sign Out</button>
               </div>
             </motion.div>
           </motion.div>

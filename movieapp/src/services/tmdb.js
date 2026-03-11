@@ -22,5 +22,6 @@ export const tmdb = {
   getDetails: (id, type = 'movie', lang) => api.get(`/${type}/${id}`, { params: { language: getLangCode(lang) } }),
   getGenres: (type = 'movie', lang) => api.get(`/genre/${type}/list`, { params: { language: getLangCode(lang) } }),
   search: (query, page = 1, type = 'movie', lang) => api.get(`/search/${type}`, { params: { query, page, language: getLangCode(lang) } }),
-  discover: (page = 1, type = 'movie', genreId = '', lang) => api.get(`/discover/${type}`, { params: { page, with_genres: genreId, language: getLangCode(lang) } })
+  discover: (page = 1, type = 'movie', genreId = '', lang) => api.get(`/discover/${type}`, { params: { page, with_genres: genreId, language: getLangCode(lang) } }),
+  getCredits: (id, type = 'movie', lang) => api.get(`/${type}/${id}/credits`, { params: { language: getLangCode(lang) } })
 };
