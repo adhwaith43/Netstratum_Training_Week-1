@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { addFavorite, removeFavorite } from '../redux/favoritesSlice';
 import { saveEditedMovie } from '../redux/editedSlice';
 import { tmdb } from '../services/tmdb';
@@ -14,13 +15,16 @@ export default function Details() {
   const [editForm, setEditForm] = useState({ title: '', overview: '', userRating: 0 });
 
   const dispatch = useDispatch();
+  const { i18n } = useTranslation();
+  
   const favorites = useSelector((state) => state.favorites.items);
   const editedData = useSelector((state) => state.editedMovies[id]); 
   
   const isFavorite = favorites.some((fav) => fav.id === parseInt(id));
 
   useEffect(() => {
-    tmdb.getDetails(id, type).then((res) => {
+    // We now pass i18n.language to ensure we get the correct localized data
+    tmdb.getDetails(id, type, i18n.language).then((res) => {
       setApiMovie(res.data);
       setEditForm({
         title: editedData?.title || res.data.title || res.data.name,
@@ -28,7 +32,7 @@ export default function Details() {
         userRating: editedData?.userRating || 0
       });
     });
-  }, [id, type, editedData]);
+  }, [id, type, editedData, i18n.language]);
 
   if (!apiMovie) return <Loader />;
 
@@ -65,7 +69,7 @@ export default function Details() {
           </div>
 
           <p style={{ color: '#aaa', marginBottom: '20px', fontSize: '1.1rem' }}>
-            Release: {apiMovie.release_date || apiMovie.first_air_date} &nbsp;|&nbsp; TMDB Rating: {apiMovie.vote_average.toFixed(1)}
+            Release: {apiMovie.release_date || apiMovie.first_air_date} &nbsp;|&nbsp; TMDB Rating: {apiMovie.vote_average?.toFixed(1)}
             {displayRating && <span style={{ color: 'gold', marginLeft: '15px' }}><FaStar style={{ transform: 'translateY(2px)' }}/> My Rating: {displayRating}/10</span>}
           </p>
           
@@ -84,7 +88,7 @@ export default function Details() {
               <label>My Rating (1-10)</label>
               <input type="number" min="0" max="10" value={editForm.userRating} onChange={(e) => setEditForm({...editForm, userRating: e.target.value})} />
               
-              <button type="submit" className="btn-primary" style={{ width: 'fit-content' }}>Save Changes</button>
+              <button type="submit" className="btn-primary" style={{ width: 'fit-content', marginTop: '15px' }}>Save Changes</button>
             </form>
           ) : (
             <>

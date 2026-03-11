@@ -28,19 +28,33 @@ button { cursor: pointer; border: none; outline: none; transition: 0.2s ease; }
 /* Hero Carousel - Fixed Black Bars */
 .hero-swiper { width: 100vw; max-width: 100%; margin-left: calc(-50vw + 50%); }
 .hero-banner { position: relative; height: 85vh; width: 100%; background-size: cover; background-position: center top; display: flex; align-items: flex-end; padding: 50px 80px; }
+/* Vastly lighter overlay, just enough to read white text */
 .hero-overlay { 
   position: absolute; 
   top: 0; 
   left: 0; 
   width: 100%; 
   height: 100%; 
-  background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0) 100%); 
+  background: linear-gradient(to top, var(--bg-color) 0%, rgba(20,20,20,0.6) 20%, rgba(0,0,0,0) 60%); 
 }
 
-/* Ensure hero text stays bright white */
-.hero-title, .hero-desc { 
-  color: #ffffff;
+
+/* Make the whole slide act as a button */
+.hero-slide-link {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 50px 80px;
+  cursor: pointer;
+  text-decoration: none;
 }
+
+
+/* Ensure text drops shadow for readability without heavy masks */
+.hero-title { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); color: white; }
+.hero-desc { font-size: 1.2rem; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 1px 1px 4px rgba(0,0,0,0.9); color: #e5e5e5; max-width: 600px; }
+
 
 .movie-row { position: relative; }
 .movie-row h2 { margin-bottom: 15px; font-size: 1.5rem; padding-left: 40px; }
