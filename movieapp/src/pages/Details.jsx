@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { addFavorite, removeFavorite } from '../redux/favoritesSlice';
@@ -8,6 +8,9 @@ import { tmdb } from '../services/tmdb';
 import { FaStar } from 'react-icons/fa';
 import Loader from '../components/Loader';
 
+import { useAuth0 } from '@auth0/auth0-react'; 
+import { hideMovie } from '../redux/hiddenSlice'; 
+
 export default function Details() {
   const { type, id } = useParams();
   const [apiMovie, setApiMovie] = useState(null);
@@ -15,7 +18,11 @@ export default function Details() {
   const [editForm, setEditForm] = useState({ title: '', overview: '', userRating: 0 });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // <-- Initialized the navigate hook here!
   const { i18n } = useTranslation();
+
+  const { user, isAuthenticated } = useAuth0();
+  const isAdmin = isAuthenticated && user?.email === 'adhwaitham@netstratum.com';
   
   const favorites = useSelector((state) => state.favorites.items);
   const editedData = useSelector((state) => state.editedMovies[id]); 
@@ -23,7 +30,6 @@ export default function Details() {
   const isFavorite = favorites.some((fav) => fav.id === parseInt(id));
 
   useEffect(() => {
-    // We now pass i18n.language to ensure we get the correct localized data
     tmdb.getDetails(id, type, i18n.language).then((res) => {
       setApiMovie(res.data);
       setEditForm({
@@ -36,7 +42,6 @@ export default function Details() {
 
   if (!apiMovie) return <Loader />;
 
-  // Merge API data with Redux edited data
   const displayTitle = editedData?.title || apiMovie.title || apiMovie.name;
   const displayOverview = editedData?.overview || apiMovie.overview;
   const displayRating = editedData?.userRating || null;
@@ -51,6 +56,13 @@ export default function Details() {
     setIsEditing(false);
   };
 
+  const handleDelete = () => {
+    if (window.confirm("Admin Action: Are you sure you want to remove this movie from the platform?")) {
+      dispatch(hideMovie(apiMovie.id));
+      navigate('/'); 
+    }
+  };
+
   return (
     <div>
       <div className="details-backdrop" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${apiMovie.backdrop_path})` }}>
@@ -63,9 +75,23 @@ export default function Details() {
         <div className="details-info">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h1 style={{ fontSize: '3rem', marginBottom: '10px' }}>{displayTitle}</h1>
-            <button className="btn-secondary" onClick={() => setIsEditing(!isEditing)}>
-              {isEditing ? 'Cancel Edit' : 'Edit Movie Info'}
-            </button>
+            
+            {/* <-- Added the Delete button right next to the Edit button here --> */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button className="btn-secondary" onClick={() => setIsEditing(!isEditing)}>
+                {isEditing ? 'Cancel Edit' : 'Edit Movie Info'}
+              </button>
+              
+              {isAdmin && (
+                <button 
+                  className="btn-primary" 
+                  style={{ backgroundColor: '#8a0303', border: '1px solid #ff4d4d' }} 
+                  onClick={handleDelete}
+                >
+                  Delete Movie
+                </button>
+              )}
+            </div>
           </div>
 
           <p style={{ color: '#aaa', marginBottom: '20px', fontSize: '1.1rem' }}>

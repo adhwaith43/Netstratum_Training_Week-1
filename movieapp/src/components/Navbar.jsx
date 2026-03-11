@@ -36,7 +36,7 @@ export default function Navbar() {
           <>
             <Link to="/favorites" style={{ display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
             <Link to="/profile">
-              <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid white' }} />
+              <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid black' }} />
             </Link>
             <button className="btn-secondary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>{t('logout')}</button>
           </>

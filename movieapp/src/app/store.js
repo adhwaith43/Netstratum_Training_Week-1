@@ -3,10 +3,12 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import favoritesReducer from '../redux/favoritesSlice';
 import editedReducer from '../redux/editedSlice';
+import hiddenReducer from '../redux/hiddenSlice';
 
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
   editedMovies: editedReducer,
+  hiddenMovies: hiddenReducer,
 });
 
 const persistConfig = { key: 'root', storage };
