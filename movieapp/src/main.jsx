@@ -1,35 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Auth0Provider } from '@auth0/auth0-react';
+import { store, persistor } from './app/store';
+import App from './App';
+import './styles/global.css';
 
-import { Provider } from "react-redux";
-import { store, persistor } from "./app/store";
-
-import { PersistGate } from "redux-persist/integration/react";
-
-import { Auth0Provider } from "@auth0/auth0-react";
-import "./styles/global.css"
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-
-<Auth0Provider
-domain="dev-8mb1rz764yedfloz.us.auth0.com"
-clientId="0Auos72FpYyjNCgu4aL4GsHkf4LKslsI"
-authorizationParams={{
-redirect_uri: window.location.origin
-}}
->
-
-<Provider store={store}>
-
-<PersistGate loading={null} persistor={persistor}>
-
-<App/>
-
-</PersistGate>
-
-</Provider>
-
-</Auth0Provider>
-
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Auth0Provider
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
+      authorizationParams={{ redirect_uri: window.location.origin }}
+    >
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </Auth0Provider>
+  </React.StrictMode>
 );

@@ -1,49 +1,13 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
+import MovieGrid from '../components/MovieGrid';
 
-import { removeFavorite } from "../redux/favoritesSlice";
-
-function Favorites(){
-
-const favorites = useSelector(state => state.favorites.items);
-
-const dispatch = useDispatch();
-
-return(
-
-<div style={{padding:"30px"}}>
-
-<h1>Your Favorites</h1>
-
-<div className="movie-grid">
-
-{favorites.map(item => (
-
-<div key={item.id}>
-
-<img
-src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-/>
-
-<p>{item.title}</p>
-
-<button
-onClick={()=>dispatch(removeFavorite(item.id))}
->
-
-Remove
-
-</button>
-
-</div>
-
-))}
-
-</div>
-
-</div>
-
-)
-
+export default function Favorites() {
+  const favorites = useSelector((state) => state.favorites.items);
+  
+  return (
+    <div className="page-container">
+      <h2>My Favorites</h2>
+      {favorites.length > 0 ? <MovieGrid movies={favorites} /> : <p>No favorite movies yet.</p>}
+    </div>
+  );
 }
-
-export default Favorites;

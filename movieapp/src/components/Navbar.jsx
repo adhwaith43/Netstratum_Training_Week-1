@@ -1,74 +1,27 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import { useAuth0 } from "@auth0/auth0-react";
+export default function Navbar() {
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
-function Navbar(){
-
-const [query,setQuery] = useState("");
-
-const navigate = useNavigate();
-
-const {
-loginWithRedirect,
-logout,
-user,
-isAuthenticated
-} = useAuth0();
-
-const handleSearch = (e)=>{
-
-if(e.key === "Enter"){
-
-navigate(`/search/${query}`);
-
+  return (
+    <nav className="navbar">
+      <Link to="/" style={{ color: 'var(--primary-color)', fontSize: '1.5rem', fontWeight: 'bold' }}>NETFLIX</Link>
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        <Link to="/search">Search</Link>
+        {isAuthenticated ? (
+          <>
+            <Link to="/favorites">Favorites</Link>
+            <Link to="/profile">
+              <img src={user.picture} alt={user.name} style={{ width: 30, borderRadius: '50%' }} />
+            </Link>
+            <button className="btn-primary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</button>
+          </>
+        ) : (
+          <button className="btn-primary" onClick={() => loginWithRedirect()}>Login</button>
+        )}
+      </div>
+    </nav>
+  );
 }
-
-}
-
-return(
-
-<nav className="navbar">
-
-<Link to="/" className="logo">MOVIEBOX</Link>
-
-<input
-className="search"
-placeholder="Search movies or TV"
-onChange={(e)=>setQuery(e.target.value)}
-onKeyDown={handleSearch}
-/>
-
-<div className="nav-right">
-
-<Link to="/favorites">Favorites</Link>
-
-{!isAuthenticated ? (
-
-<button onClick={loginWithRedirect}>Login</button>
-
-):(
-
-<div className="profile">
-
-<img src={user.picture}/>
-
-<button
-onClick={()=>logout({logoutParams:{returnTo:window.location.origin}})}
->
-Logout
-</button>
-
-</div>
-
-)}
-
-</div>
-
-</nav>
-
-)
-
-}
-
-export default Navbar;

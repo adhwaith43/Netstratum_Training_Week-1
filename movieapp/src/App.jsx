@@ -1,47 +1,26 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Details from './pages/Details';
+import Search from './pages/Search';
+import Favorites from './pages/Favorites';
+import Profile from './pages/Profile';
+import ProtectedRoute from './auth/ProtectedRoute';
 
-import Home from "./pages/Home";
-import Details from "./pages/Details";
-import Search from "./pages/Search";
-import Favorites from "./pages/Favorites";
-import Profile from "./pages/Profile";
-
-import Navbar from "./components/Navbar";
-import ProtectedRoute from "./auth/ProtectedRoute";
-
-function App(){
-
-return(
-
-<BrowserRouter>
-
-<Navbar/>
-
-<Routes>
-
-<Route path="/" element={<Home/>}/>
-
-<Route path="/details/:type/:id" element={<Details/>}/>
-
-<Route path="/search/:query" element={<Search/>}/>
-
-<Route path="/profile" element={<Profile/>}/>
-
-<Route
-path="/favorites"
-element={
-<ProtectedRoute>
-<Favorites/>
-</ProtectedRoute>
+export default function App() {
+  return (
+    <>
+      <Navbar />
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/details/:type/:id" element={<Details />} />
+          <Route path="/favorites" element={<ProtectedRoute component={Favorites} />} />
+          <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+        </Routes>
+      </AnimatePresence>
+    </>
+  );
 }
-/>
-
-</Routes>
-
-</BrowserRouter>
-
-)
-
-}
-
-export default App;

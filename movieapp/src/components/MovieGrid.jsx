@@ -1,21 +1,11 @@
-import MovieCard from "./MovieCard";
+import MovieCard from './MovieCard';
 
-function MovieGrid({ items }) {
-
-return (
-
-<div className="movie-grid">
-
-{items.map(item => (
-
-<MovieCard key={item.id} item={item}/>
-
-))}
-
-</div>
-
-);
-
+export default function MovieGrid({ movies }) {
+  return (
+    <div className="movie-grid">
+      {movies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
+    </div>
+  );
 }
-
-export default MovieGrid;

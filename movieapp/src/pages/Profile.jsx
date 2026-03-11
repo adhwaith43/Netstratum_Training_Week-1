@@ -1,31 +1,13 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 
-function Profile(){
-
-const { user, isAuthenticated } = useAuth0();
-
-if(!isAuthenticated){
-
-return <p>Please login</p>
-
+export default function Profile() {
+  const { user } = useAuth0();
+  
+  return (
+    <div className="page-container" style={{ textAlign: 'center' }}>
+      <img src={user.picture} alt={user.name} style={{ width: 150, borderRadius: '50%', marginBottom: '20px' }} />
+      <h2>{user.name}</h2>
+      <p style={{ color: '#aaa' }}>{user.email}</p>
+    </div>
+  );
 }
-
-return(
-
-<div style={{padding:"40px"}}>
-
-<h1>Profile</h1>
-
-<img src={user.picture} width="120"/>
-
-<p>{user.name}</p>
-
-<p>{user.email}</p>
-
-</div>
-
-)
-
-}
-
-export default Profile;

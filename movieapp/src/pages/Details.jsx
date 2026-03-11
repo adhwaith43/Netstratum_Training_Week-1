@@ -1,79 +1,41 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, removeFavorite } from '../redux/favoritesSlice';
+import { tmdb } from '../services/tmdb';
+import Loader from '../components/Loader';
 
-import { useDispatch } from "react-redux";
-import { addFavorite } from "../redux/favoritesSlice";
+export default function Details() {
+  const { type, id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites.items);
+  const isFavorite = favorites.some((fav) => fav.id === parseInt(id));
 
-import { getDetails } from "../services/tmdb";
+  useEffect(() => {
+    tmdb.getDetails(id, type).then((res) => setMovie(res.data));
+  }, [id, type]);
 
-function Details(){
+  if (!movie) return <Loader />;
 
-const { id, type } = useParams();
+  const handleFavorite = () => {
+    isFavorite ? dispatch(removeFavorite(movie.id)) : dispatch(addFavorite(movie));
+  };
 
-const [data,setData] = useState(null);
-
-const dispatch = useDispatch();
-
-useEffect(()=>{
-
-getDetails(id,type).then(setData)
-
-},[id,type])
-
-if(!data) return <p>Loading...</p>;
-
-const title = data.title || data.name;
-
-return(
-
-<div className="details-container">
-
-<img
-src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
-/>
-
-<div>
-
-<h1>{title}</h1>
-
-<p>{data.overview}</p>
-
-<p>Release: {data.release_date || data.first_air_date}</p>
-
-<p>⭐ {data.vote_average}</p>
-
-<p>
-
-Genres:
-
-{data.genres.map(g => (
-
-<span key={g.id}> {g.name}</span>
-
-))}
-
-</p>
-
-<button
-onClick={()=>
-dispatch(addFavorite({
-id:data.id,
-title,
-poster_path:data.poster_path
-}))
+  return (
+    <div className="page-container details-page">
+      <img className="details-poster" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+      <div className="details-info">
+        <h1>{movie.title || movie.name}</h1>
+        <p style={{ color: '#aaa', marginBottom: '20px' }}>Release: {movie.release_date || movie.first_air_date} | Rating: {movie.vote_average}</p>
+        <p style={{ marginBottom: '20px' }}>{movie.overview}</p>
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+          {movie.genres?.map(g => <span key={g.id} style={{ background: '#333', padding: '5px 10px', borderRadius: '15px' }}>{g.name}</span>)}
+        </div>
+        <button className="btn-primary" onClick={handleFavorite}>
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
+      </div>
+    </div>
+  );
 }
->
-
-Add to Favorites
-
-</button>
-
-</div>
-
-</div>
-
-)
-
-}
-
-export default Details;
