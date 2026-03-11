@@ -8,10 +8,12 @@ import Search from './pages/Search';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProtectedRoute from './auth/ProtectedRoute';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
     <>
+    <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <div style={{ minHeight: '80vh' }}> {/* Ensure content pushes footer down */}
         <AnimatePresence mode="wait">

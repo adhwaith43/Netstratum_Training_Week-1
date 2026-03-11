@@ -23,8 +23,8 @@ export default function HeroBanner({ movies }) {
         return (
           <SwiperSlide key={movie.id}>
             <div className="hero-banner" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`, padding: 0 }}>
-              <div className="hero-overlay"></div>
               <Link to={`/details/${mediaType}/${movie.id}`} className="hero-slide-link">
+              <div className="hero-overlay"></div>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className="hero-content">
                   <h1 className="hero-title">{movie.title || movie.name}</h1>
                   <p className="hero-desc">{movie.overview}</p>
