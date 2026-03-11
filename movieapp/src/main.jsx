@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { store, persistor } from './app/store';
 import App from './App';
+import './i18n';
 import './styles/global.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

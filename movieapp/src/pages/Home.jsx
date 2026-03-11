@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <div>
-      <HeroBanner movie={data.hero} />
+      <HeroBanner movies={data.trending} /> {/* Pass the whole array instead of [0] */}
       <MovieRow title="Trending Now" movies={data.trending} />
       <MovieRow title="Popular" movies={data.popular} />
       <MovieRow title="Top Rated" movies={data.topRated} />
