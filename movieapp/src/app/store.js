@@ -3,13 +3,19 @@ import favoritesReducer from "../redux/favoritesSlice";
 
 import {
   persistStore,
-  persistReducer
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER
 } from "redux-persist";
 
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "root",
+  key: "favorites",
   storage
 };
 
@@ -21,7 +27,21 @@ const persistedReducer = persistReducer(
 export const store = configureStore({
   reducer: {
     favorites: persistedReducer
-  }
+  },
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER
+        ]
+      }
+    })
 });
 
 export const persistor = persistStore(store);

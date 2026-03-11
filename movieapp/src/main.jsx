@@ -8,12 +8,13 @@ import { store, persistor } from "./app/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { Auth0Provider } from "@auth0/auth0-react";
+import "./styles/global.css"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 
 <Auth0Provider
-domain="YOUR_AUTH0_DOMAIN"
-clientId="YOUR_CLIENT_ID"
+domain="dev-8mb1rz764yedfloz.us.auth0.com"
+clientId="0Auos72FpYyjNCgu4aL4GsHkf4LKslsI"
 authorizationParams={{
 redirect_uri: window.location.origin
 }}
