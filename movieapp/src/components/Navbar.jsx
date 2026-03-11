@@ -34,7 +34,7 @@ export default function Navbar() {
 
         {isAuthenticated ? (
           <>
-            <Link to="/favorites" style={{ fontWeight: 'bold', display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
+            <Link to="/favorites" style={{ display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
             <Link to="/profile">
               <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid white' }} />
             </Link>
