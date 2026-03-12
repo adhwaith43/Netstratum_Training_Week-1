@@ -31,11 +31,11 @@ export default function Navbar() {
             <Link to="/search?type=movie" style={{ fontWeight: '500' }}>{t('movies')}</Link>
           </div>
         </div>
-        
+
         <div className="nav-links">
           {/* Default Search Icon routes to 'all' */}
           <FaSearch size={20} style={{ cursor: 'pointer' }} onClick={() => navigate('/search?type=all')} />
-          
+
           <button onClick={toggleTheme} style={{ background: 'transparent', color: 'var(--text-color)', fontSize: '1.2rem', padding: '0 5px' }}>
             {theme === 'dark' ? <FaSun /> : <FaMoon />}
           </button>
@@ -50,9 +50,23 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <Link to="/favorites" style={{ fontWeight: 'bold', display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
+              <Link to="/favorites" style={{ display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
               <Link to="/profile">
-                <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid var(--text-color)' }} />
+                <img
+                  src={user.picture}
+                  alt="U"
+                  style={{
+                    width: '35px',
+                    minWidth: '35px',
+                    height: '35px',
+                    borderRadius: '50%',
+                    border: '2px solid var(--text-color)',
+                    objectFit: 'cover',
+                    display: 'block',
+                    overflow: 'hidden'
+                  }}
+                  onError={(e) => { e.target.src = 'https://via.placeholder.com/35?text=U'; }}
+                />
               </Link>
               <button className="btn-secondary" onClick={() => setShowLogoutModal(true)}>{t('logout')}</button>
             </>

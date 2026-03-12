@@ -6,7 +6,6 @@
    1. THEME VARIABLES (Premium Colors)
    ========================================= */
 :root {
-  /* Dark Theme (Default) */
   --bg-color: #141414;
   --text-color: #ffffff;
   --primary-color: #e50914;
@@ -14,12 +13,10 @@
   --input-bg: #2b2b2b;
   --border-color: #444444;
   --btn-secondary-bg: #333333;
-  /* Custom SVG Arrow coded in white */
   --select-arrow: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
 }
 
 [data-theme='light'] {
-  /* Premium Light Theme (Softer contrasts) */
   --bg-color: #f8f9fa; 
   --text-color: #1f2328; 
   --primary-color: #d81f26; 
@@ -27,7 +24,6 @@
   --input-bg: #e1e4e8;
   --border-color: #d1d5da;
   --btn-secondary-bg: #e1e4e8;
-  /* Custom SVG Arrow coded in dark gray */
   --select-arrow: url('data:image/svg+xml;utf8,<svg fill="%231f2328" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
 }
 
@@ -56,40 +52,36 @@ button { cursor: pointer; border: none; outline: none; transition: 0.2s ease; }
 .btn-primary { background: var(--primary-color); color: white; padding: 8px 16px; border-radius: 4px; font-weight: bold; }
 .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-color); padding: 8px 16px; border-radius: 4px; font-weight: bold; border: 1px solid var(--border-color); }
 
-/* The Perfect Dropdown Arrow Fix */
 .lang-select { 
   background-color: transparent; 
   color: var(--text-color); 
   border: 1px solid var(--border-color); 
-  padding: 6px 28px 6px 10px; /* Extra right padding for our custom arrow */
+  padding: 6px 28px 6px 10px; 
   border-radius: 4px; 
   outline: none; 
   cursor: pointer; 
   transition: background-color 0.2s ease;
-  
-  /* Nuke the browser's default ugly arrow */
   appearance: none; 
   -webkit-appearance: none;
   -moz-appearance: none;
-  
-  /* Inject our custom SVG arrow that adapts to the theme */
   background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 6px center;
   background-size: 18px;
 }
-.lang-select:hover { background-color: rgba(128, 128, 128, 0.1); } /* Soft hover effect */
+.lang-select:hover { background-color: rgba(128, 128, 128, 0.1); } 
 .lang-select option { background: var(--bg-color); color: var(--text-color); }
 
 .search-input { background: transparent; border: none; color: var(--text-color); outline: none; padding: 5px; width: 200px; }
-.controls select, .controls input { background: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); }
+.controls select, .controls input { background-color: var(--input-bg); color: var(--text-color); border: 1px solid var(--border-color); }
 
 /* =========================================
    4. HERO BANNER
    ========================================= */
-.hero-swiper { padding: 0 !important; width: 100vw; max-width: 100%; margin-left: calc(-50vw + 50%); }
+.hero-swiper { padding: 0 !important; width: 100vw;margin-left: calc(-50vw + 50%); }
 .hero-banner { position: relative; height: 85vh; width: 100%; background-size: cover; background-position: center top; display: flex; align-items: flex-end; padding: 50px 80px; }
 .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-color) 0%, rgba(20,20,20,0.5) 30%, rgba(0,0,0,0) 80%); }
+[data-theme='light'] .hero-overlay { display: none; }
 .hero-slide-link { display: flex; align-items: flex-end; width: 100%; height: 100%; padding: 50px 80px; cursor: pointer; text-decoration: none; }
 .hero-title { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); color: white; }
 .hero-desc { font-size: 1.2rem; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 1px 1px 4px rgba(0,0,0,0.9); color: #e5e5e5; max-width: 600px; }
@@ -153,3 +145,40 @@ button { cursor: pointer; border: none; outline: none; transition: 0.2s ease; }
 .footer-link { cursor: pointer; transition: color 0.2s; }
 .footer-link:hover { text-decoration: underline; color: var(--text-color); }
 .footer-copy { max-width: 1000px; margin: 30px auto 0; padding-top: 20px; }
+
+/* =========================================
+   8. GENRE DROPDOWN
+   ========================================= */
+.controls .genre-select { 
+  background-color: transparent; 
+  color: var(--text-color); 
+  border: 1px solid var(--border-color); 
+  border-radius: 6px; 
+  outline: none; 
+  cursor: pointer; 
+  font-size: 1.1rem;
+  min-width: 200px; 
+  height: 50px;
+  
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  background-image: var(--select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+  
+  padding: 10px 45px 10px 15px; 
+}
+
+.controls .genre-select:hover, .controls .genre-select:focus { 
+  background-color: transparent; 
+}
+
+.controls .genre-select option { 
+  background: var(--bg-color); 
+  color: var(--text-color); 
+  font-size: 1.1rem;
+  padding: 10px;
+}

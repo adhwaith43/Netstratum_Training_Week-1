@@ -25,7 +25,7 @@ export default function Favorites() {
         <MovieGrid movies={visibleFavorites} />
       ) : (
         <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '1.2rem', color: '#888' }}>
-          No favorite movies yet. Go add some!
+          No favorite movies / tv shows yet. Go add some!
         </div>
       )}
     </div>
