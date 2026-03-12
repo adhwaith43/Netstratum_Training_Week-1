@@ -2,9 +2,12 @@ import { useSelector } from 'react-redux';
 import MovieCard from './MovieCard';
 
 export default function MovieGrid({ movies }) {
-  const hiddenMovies = useSelector((state) => state.hiddenMovies);
+  // Add the || [] fallback to prevent crashing if state is temporarily undefined
+  const hiddenMovies = useSelector((state) => state.hiddenMovies || []);
   
-  // Filter out the deleted movies before mapping
+  if (!movies || movies.length === 0) return null;
+
+  // Safely filter out the deleted movies
   const visibleMovies = movies.filter(movie => !hiddenMovies.includes(movie.id));
 
   return (

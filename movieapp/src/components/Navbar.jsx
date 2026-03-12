@@ -12,7 +12,6 @@ export default function Navbar() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [theme, setTheme] = useState('dark');
 
-  // Theme logic
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
@@ -27,16 +26,16 @@ export default function Navbar() {
             CINEVAULT
           </Link>
           <div style={{ gap: '15px', display: window.innerWidth > 768 ? 'flex' : 'none' }}>
-            {/* Removed the 'Home' link as requested */}
+            {/* These links now act as powerful filters for the Search page */}
             <Link to="/search?type=tv" style={{ fontWeight: '500' }}>{t('tvShows')}</Link>
             <Link to="/search?type=movie" style={{ fontWeight: '500' }}>{t('movies')}</Link>
           </div>
         </div>
         
         <div className="nav-links">
-          <FaSearch size={20} style={{ cursor: 'pointer' }} onClick={() => navigate('/search')} />
+          {/* Default Search Icon routes to 'all' */}
+          <FaSearch size={20} style={{ cursor: 'pointer' }} onClick={() => navigate('/search?type=all')} />
           
-          {/* Theme Toggle Button */}
           <button onClick={toggleTheme} style={{ background: 'transparent', color: 'var(--text-color)', fontSize: '1.2rem', padding: '0 5px' }}>
             {theme === 'dark' ? <FaSun /> : <FaMoon />}
           </button>
@@ -51,9 +50,9 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <>
-              <Link to="/favorites" style={{display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
+              <Link to="/favorites" style={{ fontWeight: 'bold', display: window.innerWidth > 768 ? 'block' : 'none' }}>{t('favorites')}</Link>
               <Link to="/profile">
-                <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%'}} />
+                <img src={user.picture} alt={user.name} style={{ width: 35, borderRadius: '50%', border: '2px solid var(--text-color)' }} />
               </Link>
               <button className="btn-secondary" onClick={() => setShowLogoutModal(true)}>{t('logout')}</button>
             </>

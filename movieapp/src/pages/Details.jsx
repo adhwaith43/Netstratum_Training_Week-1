@@ -9,7 +9,6 @@ import { FaStar } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import Loader from '../components/Loader';
-
 import { useAuth0 } from '@auth0/auth0-react'; 
 import { hideMovie } from '../redux/hiddenSlice'; 
 
@@ -26,17 +25,16 @@ export default function Details() {
   const { i18n } = useTranslation();
 
   const { user, isAuthenticated } = useAuth0();
-  // Ensure you use your exact Auth0 email here!
   const isAdmin = isAuthenticated && user?.email === 'adhwaitham@netstratum.com';
   const userId = user?.sub; 
   
   const userFavorites = useSelector((state) => {
-    if (!state || !state.favorites || !state.favorites.users) return [];
+    if (!state?.favorites?.users || !userId) return [];
     return state.favorites.users[userId] || [];
   });
   
   const editedData = useSelector((state) => state.editedMovies?.[id]); 
-  const isFavorite = userFavorites.some((fav) => fav.id === parseInt(id));
+  const isFavorite = userFavorites.some((fav) => Number(fav.id) === Number(id));
 
   useEffect(() => {
     tmdb.getDetails(id, type, i18n.language).then((res) => {
@@ -48,9 +46,8 @@ export default function Details() {
       });
     });
 
-    // Fetch Cast Data
     tmdb.getCredits(id, type, i18n.language).then((res) => {
-      setCast(res.data.cast.slice(0, 12)); // Grab top 12 actors
+      setCast(res.data.cast.slice(0, 12)); 
     });
   }, [id, type, editedData, i18n.language]);
 
@@ -61,7 +58,15 @@ export default function Details() {
   const displayRating = editedData?.userRating || null;
 
   const handleFavorite = () => {
-    if (!isAuthenticated) return; 
+    if (!isAuthenticated) {
+      toast.error("Please log in to save favorites.");
+      return;
+    }
+    if (!userId) {
+      toast.error("Profile loading, please wait...");
+      return; 
+    }
+    
     if (isFavorite) {
       dispatch(removeFavorite({ userId, movieId: apiMovie.id }));
       toast.success("Removed from Favorites");
@@ -136,7 +141,6 @@ export default function Details() {
             <>
               <p style={{ marginBottom: '30px', fontSize: '1.2rem', lineHeight: '1.6', maxWidth: '800px' }}>{displayOverview}</p>
               
-              {/* Cast Row Section */}
               {cast.length > 0 && (
                 <div className="cast-container">
                   <h3 style={{ marginBottom: '15px' }}>Top Cast</h3>
@@ -162,7 +166,6 @@ export default function Details() {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
       <AnimatePresence>
         {showDeleteModal && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -177,7 +180,6 @@ export default function Details() {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }

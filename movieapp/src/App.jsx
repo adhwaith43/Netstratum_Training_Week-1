@@ -1,21 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Toaster } from 'react-hot-toast'; 
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // <-- Import Footer
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Details from './pages/Details';
 import Search from './pages/Search';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import ProtectedRoute from './auth/ProtectedRoute';
-import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
     <>
-    <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} /> 
       <Navbar />
-      <div style={{ minHeight: '80vh' }}> {/* Ensure content pushes footer down */}
+      <div style={{ minHeight: '80vh' }}>
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -26,7 +26,7 @@ export default function App() {
           </Routes>
         </AnimatePresence>
       </div>
-      <Footer /> {/* <-- Add Footer here */}
+      <Footer />
     </>
   );
 }
