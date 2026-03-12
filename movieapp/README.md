@@ -36,7 +36,7 @@ A premium, responsive movie and TV show discovery application built with modern 
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/yourusername/cinevault.git](https://github.com/yourusername/cinevault.git)
+    git clone [https://github.com/adhwaith43/cinevault.git](https://github.com/adhwaith43/cinevault.git)
     cd cinevault
     ```
 
