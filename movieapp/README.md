@@ -1,16 +1,76 @@
-# React + Vite
+# 🎬 Cinevault
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, responsive movie and TV show discovery application built with modern React. Cinevault allows users to browse trending media, search across multiple categories, customize their viewing experience with light/dark themes and multi-language support, and securely save their favorite titles.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **Extensive Media Library:** Powered by the TMDB API to fetch the latest trending movies, top-rated TV shows, and detailed cast information.
+* **Secure Authentication:** Integrated with Auth0 for seamless user login and secure profile management.
+* **User-Specific Favorites:** Utilizes Redux Toolkit and Redux Persist to save favorite movies uniquely to individual user profiles.
+* **Advanced Search & Filtering:** Dynamic multi-search functionality allowing users to filter by Movies, TV Shows, and specific Genres.
+* **Localization (i18n):** Full support for English, Spanish, French, Hindi, and Malayalam.
+* **Theming:** Premium Dark and Light mode toggles using CSS variables for a seamless visual transition.
+* **Admin Controls:** Platform admins can soft-delete or hide specific movies from the global feed.
+* **Customizable Content:** Users can locally edit and save movie titles, overviews, and personal ratings.
+* **Smooth UI/UX:** Built with Swiper.js for touch-friendly carousels, Framer Motion for modal animations, and React Hot Toast for instant visual feedback.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Frontend:** React (Vite), CSS3, Framer Motion, Swiper.js
+* **State Management:** Redux Toolkit, Redux Persist
+* **Authentication:** Auth0
+* **Routing:** React Router DOM
+* **API/Data:** Axios, TMDB API
+* **Internationalization:** react-i18next
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+* Node.js (v16 or higher)
+* NPM or Yarn
+* A TMDB API Key
+* An Auth0 Account
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/yourusername/cinevault.git](https://github.com/yourusername/cinevault.git)
+    cd cinevault
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables:**
+    Create a `.env` file in the root directory and add the following keys:
+    ```env
+    VITE_TMDB_KEY=your_tmdb_api_key_here
+    VITE_AUTH0_DOMAIN=your_auth0_domain_here
+    VITE_AUTH0_CLIENT_ID=your_auth0_client_id_here
+    ```
+
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+5.  Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+## 📂 Key Dependencies
+
+* `@auth0/auth0-react` - Identity management
+* `react-redux` & `@reduxjs/toolkit` - State management
+* `redux-persist` - Local storage caching
+* `react-hot-toast` - Push notifications
+* `framer-motion` - Component animations
+* `swiper` - Media carousels
+
+## 👨‍💻 Author
+
+**Adhwaith A M**
+* GitHub: [@adhwaitham](https://github.com/adhwaitham)
+* LinkedIn: [Adhwaith A M](https://linkedin.com/in/adhwaitham)
