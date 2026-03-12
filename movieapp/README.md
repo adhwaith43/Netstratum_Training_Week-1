@@ -72,5 +72,5 @@ A premium, responsive movie and TV show discovery application built with modern 
 ## 👨‍💻 Author
 
 **Adhwaith A M**
-* GitHub: [@adhwaitham](https://github.com/adhwaitham)
+* GitHub: [@adhwaitham](https://github.com/adhwaith43)
 * LinkedIn: [Adhwaith A M](https://linkedin.com/in/adhwaitham)
